@@ -2,15 +2,13 @@ import { useEffect } from 'react';
 
 export const Modal = ({ img, alt, onToggle }) => {
   useEffect(() => {
+    const onKeyDown = e => {
+      if (e.code === 'Escape') {
+        onToggle();
+      }
+    };
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
-
-  const onKeyDown = e => {
-    if (e.code === 'Escape') {
-      onToggle();
-    }
-  };
+  }, [onToggle]);
 
   const onClick = ({ target }) => {
     if (target.className !== 'overlay') {
